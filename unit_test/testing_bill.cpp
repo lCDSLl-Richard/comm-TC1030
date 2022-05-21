@@ -69,6 +69,16 @@ TEST_CASE("testing pay", "[pay]") {
 	REQUIRE(b.getTotalMoneySpent() == 50.0);
 }
 
+TEST_CASE("testing changeTheLimit", "[changeTheLimit]"){
+	Bill b(100);
+
+	b.changeTheLimit(150.0);
+	REQUIRE(b.getLimitAmount() == 150.0);
+	b.add(80.0);
+	b.changeTheLimit(50.0);
+	REQUIRE(b.getLimitAmount() == 150.0);
+}
+
 TEST_CASE("testing copy constructor", "[Bill(const Bill&)]") {
 	Bill b(100.0);
 	b.add(50.0);
