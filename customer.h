@@ -22,7 +22,7 @@ private:
 
 public:
   Customer(int, std::string, int, Operator*, double);
-  Customer(const Customer&);
+  Customer(const Customer&);  
   ~Customer();
 
   int getId() const;
@@ -43,5 +43,68 @@ public:
   void connection(double);
   void pay(double);
 };
+
+Customer::Customer(int nId, std::string nName, int nAge, Operator *nOp, double creditLimit){
+  Bill nBill(creditLimit);
+  bill = &nBill;
+  op = nOp;
+  id = nId;
+  age = nAge;
+  totalSpentTalkingTime = op.getTotalSpentTalkingTime();
+  totalMessageSent = op.getTotalMessageSent();
+  totalInternetUsage = op.getTotalInternetUsage();
+  name = nName;
+}
+
+Costumer::Costumer(const Costumer &other){
+  id = other.id;
+  age = other.age;
+  totalSpentTalkingTime = other.totalSpentTalkingTime;
+  totalMessageSent = other.totalMessageSent;
+  totalInternetUsage = other.totalInternetUsage;
+  name = other.name;
+  op = other.op;
+  bill = other.bill;
+}
+
+Costumer::~Costumer(){}
+
+int Costumer::getId() const{
+  return id;
+}
+
+int Costumer::getAge() const{
+  return age;
+}
+
+int Costumer::getTotalSpentTalkingTime() const{
+  return totalSpentTalkingTime;
+}
+
+int Costumer::getTotalMessageSent() const{
+  return totalMessageSent;
+}
+
+double Costumer::getTotalInternetUsage() const{
+  return totalInternetUsage;
+}
+
+std::string Costumer::getName() const{
+  return name;
+}
+
+Operator* Costumer::getOperator() const{
+  return op;
+}
+
+Bill* Costumer::getBill() const{
+  return bill;
+}
+
+void Costumer::setOperator(Operator* nOp){
+  op = nOp;
+}
+
+
 
 #endif
