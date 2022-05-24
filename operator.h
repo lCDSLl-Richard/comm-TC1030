@@ -122,9 +122,12 @@ void Operator::addTotalInternetUsage(double gbs){
 }
 
 std::string Operator::toString() const{
-  string info = printf("Operator #%d: %d %d %.2f", id, totalSpentTalkingTime, totalMessageSent, totalInternetUsage);
+  std::stringstream info;
 
-  return info;
+  info << std::fixed << std::setprecision(2);
+  info << "Operator #" << id << ":" << std::fixed << std::setprecision(2) << totalSpentTalkingTime << " " << std::fixed << std::setprecision(2) << totalMessageSent << " " << std::fixed << std::setprecision(2) << totalInternetUsage;
+
+  return info.str();
 }
 
 #endif
