@@ -18,7 +18,7 @@ TEST_CASE("testing default constructor",
 
 	REQUIRE(vox.getId() == 1);
   REQUIRE(vox.getDiscountRate() == 10);
-  REQUIRE(vox.getTalkingChage() == 10.0);
+  REQUIRE(vox.getTalkingCharge() == 10.0);
   REQUIRE(vox.getMessageCost() == 10.0);
   REQUIRE(vox.getNetworkCharge() == 10.0);
   REQUIRE(vox.getTotalSpentTalkingTime() == 0);
@@ -90,7 +90,7 @@ TEST_CASE("testing copy constructor",
   VoxOperator b(vox);
 	REQUIRE(b.getId() == 1);
   REQUIRE(b.getDiscountRate() == 10);
-  REQUIRE(b.getTalkingChage() == 10.0);
+  REQUIRE(b.getTalkingCharge() == 10.0);
   REQUIRE(b.getMessageCost() == 10.0);
   REQUIRE(b.getNetworkCharge() == 10.0);
   REQUIRE(b.getTotalSpentTalkingTime() == 200);
