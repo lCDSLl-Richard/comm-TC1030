@@ -18,7 +18,7 @@ TEST_CASE("testing default constructor",
 
 	REQUIRE(op.getId() == 1);
   REQUIRE(op.getDiscountRate() == 10);
-  REQUIRE(op.getTalkingChage() == 10.0);
+  REQUIRE(op.getTalkingCharge() == 10.0);
   REQUIRE(op.getMessageCost() == 10.0);
   REQUIRE(op.getNetworkCharge() == 10.0);
   REQUIRE(op.getTotalSpentTalkingTime() == 0);
@@ -91,7 +91,7 @@ TEST_CASE("testing copy constructor",
   InternetOperator b(op);
 	REQUIRE(b.getId() == 1);
   REQUIRE(b.getDiscountRate() == 10);
-  REQUIRE(b.getTalkingChage() == 10.0);
+  REQUIRE(b.getTalkingCharge() == 10.0);
   REQUIRE(b.getMessageCost() == 10.0);
   REQUIRE(b.getNetworkCharge() == 10.0);
   REQUIRE(b.getTotalSpentTalkingTime() == 200);
