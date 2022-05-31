@@ -12,6 +12,8 @@
 #include <sstream>
 #include <iomanip>
 
+using namespace std;
+
 typedef enum{VOX, INTERNET} OperatorType;
 
 class Operator {
@@ -39,7 +41,7 @@ public:
   void addTotalMessageSent(int);
   void addTotalInternetUsage(double);
 
-  std::string toString() const;
+  string toString() const;
 
   virtual double calculateTalkingCost(int, int) = 0;
   virtual double calculateMessageCost(int, int, int) = 0;
@@ -62,7 +64,7 @@ Operator::Operator(const Operator &other){
   id = other.id;
   discountRate = other.discountRate;
   talkingCharge = other.talkingCharge;
-  messageCost = other.messCost;
+  messageCost = other.messageCost;
   networkCharge = other.networkCharge;
   totalInternetUsage = other.totalInternetUsage;
   totalSpentTalkingTime = other.totalSpentTalkingTime;
@@ -121,11 +123,11 @@ void Operator::addTotalInternetUsage(double gbs){
   totalInternetUsage += gbs;
 }
 
-std::string Operator::toString() const{
-  std::stringstream info;
+string Operator::toString() const{
+  stringstream info;
 
-  info << std::fixed << std::setprecision(2);
-  info << "Operator #" << id << ":" << std::fixed << std::setprecision(2) << totalSpentTalkingTime << " " << std::fixed << std::setprecision(2) << totalMessageSent << " " << std::fixed << std::setprecision(2) << totalInternetUsage;
+  info << fixed << setprecision(2);
+  info << "Operator #" << id << ":" << fixed << setprecision(2) << totalSpentTalkingTime << " " << fixed << setprecision(2) << totalMessageSent << " " << fixed << setprecision(2) << totalInternetUsage;
 
   return info.str();
 }
