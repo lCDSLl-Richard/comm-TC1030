@@ -1,8 +1,8 @@
 // =========================================================
 // File: customer.h
-// Author:
-// Date:
-// Description:
+// Author: Ricardo Fernandez
+// Date: 31/05/2022
+// Description: Implementation of class costumer
 // =========================================================
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
@@ -13,16 +13,18 @@
 #include "bill.h"
 #include "operator.h"
 
+using namespace std;
+
 class Customer {
 private:
   int id, age, totalSpentTalkingTime, totalMessageSent, totalInternetUsage;
-  std::string name;
-  Operator* op;
+  string name;
+  Operator *op;
   Bill *bill;
 
 public:
-  Customer(int, std::string, int, Operator*, double);
-  Customer(const Customer&);  
+  Customer(int, string, int, Operator*, double);
+  Customer(const Customer&);
   ~Customer();
 
   int getId() const;
@@ -30,13 +32,13 @@ public:
   int getTotalSpentTalkingTime() const;
   int getTotalMessageSent() const;
   double getTotalInternetUsage() const;
-  std::string getName() const;
+  string getName() const;
   Operator* getOperator() const;
   Bill* getBill() const;
 
   void setOperator(Operator*);
 
-  std::string toString() const;
+  string toString() const;
 
   void talk (int, Customer&);
   void message(int, const Customer&);
@@ -44,19 +46,18 @@ public:
   void pay(double);
 };
 
-Customer::Customer(int nId, std::string nName, int nAge, Operator *nOp, double creditLimit){
-  Bill nBill(creditLimit);
-  bill = &nBill;
+Customer::Customer(int nId, string nName, int nAge, Operator *nOp, double creditLimit){
+  bill = new Bill(creditLimit);
   op = nOp;
   id = nId;
   age = nAge;
-  totalSpentTalkingTime = op.getTotalSpentTalkingTime();
-  totalMessageSent = op.getTotalMessageSent();
-  totalInternetUsage = op.getTotalInternetUsage();
+  totalSpentTalkingTime = 0;
+  totalMessageSent = 0;
+  totalInternetUsage = 0;
   name = nName;
 }
 
-Costumer::Costumer(const Costumer &other){
+Customer::Customer(const Customer &other){
   id = other.id;
   age = other.age;
   totalSpentTalkingTime = other.totalSpentTalkingTime;
@@ -67,44 +68,94 @@ Costumer::Costumer(const Costumer &other){
   bill = other.bill;
 }
 
-Costumer::~Costumer(){}
+Customer::~Customer(){
+  delete bill, op;
+}
 
-int Costumer::getId() const{
+int Customer::getId() const{
   return id;
 }
 
-int Costumer::getAge() const{
+int Customer::getAge() const{
   return age;
 }
 
-int Costumer::getTotalSpentTalkingTime() const{
+int Customer::getTotalSpentTalkingTime() const{
   return totalSpentTalkingTime;
 }
 
-int Costumer::getTotalMessageSent() const{
+int Customer::getTotalMessageSent() const{
   return totalMessageSent;
 }
 
-double Costumer::getTotalInternetUsage() const{
+double Customer::getTotalInternetUsage() const{
   return totalInternetUsage;
 }
 
-std::string Costumer::getName() const{
+string Customer::getName() const{
   return name;
 }
 
-Operator* Costumer::getOperator() const{
+Operator* Customer::getOperator() const{
   return op;
 }
 
-Bill* Costumer::getBill() const{
+Bill* Customer::getBill() const{
   return bill;
 }
 
-void Costumer::setOperator(Operator* nOp){
+void Customer::setOperator(Operator* nOp){
   op = nOp;
 }
 
+string Customer::toString() const{
+  stringstream info;
+
+  info << fixed << setprecision(2);
+  info << "Customer #" << id << ": " << fixed << setprecision(2) << bill->getTotalMoneySpent() << " " << bill->getCurrentDebt();
+
+  return info.str();
+}
+void Customer::talk(int minutes, Customer &other){
+  if(minutes > 0 && id != other.id){
+    double cost = op->calculateTalkingCost(minutes, age);
+    if(bill->check(cost)){
+      bill->add(cost);
+      totalSpentTalkingTime += minutes;
+      op->addTalkingTime(minutes);
+      other.totalSpentTalkingTime += minutes;
+      other.op->addTalkingTime(minutes);
+    }
+  }
+}
+
+void Customer::message(int quantity, const Customer &other){
+  if(quantity > 0 && id != other.id){
+    double cost = op->calculateMessageCost(quantity, op->getId(), other.op->getId());
+    if(bill->check(cost)){
+      bill->add(cost);
+      totalMessageSent += quantity;
+      op->addTotalMessageSent(quantity);
+    }
+  }
+}
+
+void Customer::connection(double amount){
+  if(amount > 0){
+    double cost = op->calculateNetworkCost(amount);
+    if(bill->check(cost)){
+      bill->add(cost);
+      totalInternetUsage += amount;
+      op->addTotalInternetUsage(amount);
+    }
+  }
+}
+
+void Customer::pay(double amount){
+  if(amount > 0){
+    bill->pay(amount);
+  }
+}
 
 
 #endif

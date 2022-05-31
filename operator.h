@@ -110,7 +110,7 @@ OperatorType Operator::getType() const{
 
 void Operator::addTalkingTime(int min){
   if (min < 0){return;}
-  totalSpentTalkingTime =+ min;
+  totalSpentTalkingTime += min;
 }
 
 void Operator::addTotalMessageSent(int quant){
@@ -127,7 +127,7 @@ string Operator::toString() const{
   stringstream info;
 
   info << fixed << setprecision(2);
-  info << "Operator #" << id << ":" << fixed << setprecision(2) << totalSpentTalkingTime << " " << fixed << setprecision(2) << totalMessageSent << " " << fixed << setprecision(2) << totalInternetUsage;
+  info << "Operator #" << id << ": " << fixed << setprecision(2) << totalSpentTalkingTime << " " << fixed << setprecision(2) << totalMessageSent << " " << fixed << setprecision(2) << totalInternetUsage;
 
   return info.str();
 }
