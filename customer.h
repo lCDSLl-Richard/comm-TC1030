@@ -124,7 +124,9 @@ void Customer::talk(int minutes, Customer &other){
       totalSpentTalkingTime += minutes;
       op->addTalkingTime(minutes);
       other.totalSpentTalkingTime += minutes;
-      other.op->addTalkingTime(minutes);
+      if(other.op->getId() != op->getId()){
+        other.op->addTalkingTime(minutes);
+      }
     }
   }
 }
