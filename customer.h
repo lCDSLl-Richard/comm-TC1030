@@ -112,7 +112,7 @@ string Customer::toString() const{
   stringstream info;
 
   info << fixed << setprecision(2);
-  info << "Customer #" << id << ": " << fixed << setprecision(2) << bill->getTotalMoneySpent() << " " << bill->getCurrentDebt();
+  info << "Customer " << id << ": " << fixed << setprecision(2) << bill->getTotalMoneySpent() << " " << bill->getCurrentDebt();
 
   return info.str();
 }

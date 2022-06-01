@@ -127,7 +127,7 @@ string Operator::toString() const{
   stringstream info;
 
   info << fixed << setprecision(2);
-  info << "Operator #" << id << ": " << fixed << setprecision(2) << totalSpentTalkingTime << " " << fixed << setprecision(2) << totalMessageSent << " " << fixed << setprecision(2) << totalInternetUsage;
+  info << "Operator " << id << ": " << fixed << setprecision(2) << totalSpentTalkingTime << " " << fixed << setprecision(2) << totalMessageSent << " " << fixed << setprecision(2) << totalInternetUsage;
 
   return info.str();
 }
