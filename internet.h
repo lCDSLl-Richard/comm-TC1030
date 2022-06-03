@@ -31,7 +31,7 @@ double InternetOperator::calculateTalkingCost(int minute, int age){
   if(minute <= 0 || age <= 0){return 0;}
   double cost = minute*talkingCharge;
   if(minute < 2){
-    cost = cost*(1-(double(discountRate)/100));
+    cost = cost*(1-(discountRate/100.0));
   }
   return cost;
 }
