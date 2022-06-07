@@ -69,7 +69,10 @@ Customer::Customer(const Customer &other){
 }
 
 Customer::~Customer(){
-  delete bill, op;
+  delete bill;
+  delete op;
+  bill = NULL;
+  op = NULL;
 }
 
 int Customer::getId() const{
