@@ -49,7 +49,7 @@ double InternetOperator::calculateNetworkCost(double amount){
   if(amount <= 0){return 0;}
   double cost = 0;
   if(amount+totalInternetUsage > LIMITGB){
-    cost = (amount+totalInternetUsage-LIMITGB)*networkCharge;
+    cost = (amount)*networkCharge;
   }
   return cost;
 }
