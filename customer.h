@@ -70,7 +70,6 @@ Customer::Customer(const Customer &other){
 
 Customer::~Customer(){
   delete bill;
-  delete op;
   bill = NULL;
   op = NULL;
 }
@@ -126,7 +125,7 @@ void Customer::talk(int minutes, Customer &other){
       bill->add(cost);
       totalSpentTalkingTime += minutes;
       op->addTalkingTime(minutes);
-      other.totalSpentTalkingTime += minutes;
+      //other.totalSpentTalkingTime += minutes;
       if(other.op->getId() != op->getId()){
         other.op->addTalkingTime(minutes);
       }

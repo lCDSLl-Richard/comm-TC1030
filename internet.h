@@ -12,7 +12,7 @@
 
 class InternetOperator : public Operator {
 private:
-  const double LIMITGB = 10.0;
+  const double LIMITGB = 1.0;
 
 public:
   InternetOperator(int, double, double, double, int, OperatorType);
@@ -46,10 +46,15 @@ double InternetOperator::calculateMessageCost(int quantity, int thisOpId, int ot
 }
 
 double InternetOperator::calculateNetworkCost(double amount){
+  bool flag = true;
+  
   if(amount <= 0){return 0;}
   double cost = 0;
-  if(amount+totalInternetUsage > LIMITGB){
-    cost = (amount)*networkCharge;
+  if(amount+totalInternetUsage > LIMITGB && flag){
+    cost = (amount-LIMITGB)*networkCharge;
+    flag = false;
+  }else if (!flag){
+    cost = amount*networkCharge;
   }
   return cost;
 }
