@@ -1,8 +1,8 @@
 // =========================================================
 // File: main.cpp
-// Author:
-// Date:
-// Description:
+// Author: Ricardo Fernandez
+// Date: 14/06/2022
+// Description: Implementation of file io
 // To compile: g++ -std=c++11 main.cpp -o app
 // To execute: ./app input_file output_file
 // =========================================================
